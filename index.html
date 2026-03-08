@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SkyRoll Adventure</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader-content">
+            <div class="game-logo">
+                <span class="logo-sky">SKY</span><span class="logo-roll">ROLL</span>
+                <div class="logo-sub">ADVENTURE</div>
+            </div>
+            <div class="loader-bar-container">
+                <div class="loader-bar" id="loader-bar"></div>
+            </div>
+            <div class="loader-text" id="loader-text">Loading assets...</div>
+        </div>
+    </div>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen hidden">
+        <div class="menu-bg-particles" id="menu-particles"></div>
+        <div class="menu-content">
+            <div class="game-logo large">
+                <span class="logo-sky">SKY</span><span class="logo-roll">ROLL</span>
+                <div class="logo-sub">ADVENTURE</div>
+            </div>
+            <div class="menu-buttons">
+                <button class="menu-btn primary" id="btn-play"><i class="fas fa-play"></i> Play</button>
+                <button class="menu-btn" id="btn-levels"><i class="fas fa-th"></i> Levels</button>
+                <button class="menu-btn" id="btn-shop"><i class="fas fa-store"></i> Shop</button>
+                <button class="menu-btn" id="btn-modes"><i class="fas fa-gamepad"></i> Game Modes</button>
+                <button class="menu-btn" id="btn-achievements"><i class="fas fa-trophy"></i> Achievements</button>
+                <button class="menu-btn" id="btn-settings"><i class="fas fa-cog"></i> Settings</button>
+            </div>
+            <div class="menu-footer">
+                <div class="coin-display"><i class="fas fa-coins"></i> <span id="menu-coins">0</span></div>
+                <div class="daily-reward-badge" id="daily-reward-badge"><i class="fas fa-gift"></i> Daily Reward!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Select Screen -->
+    <div id="level-select" class="screen hidden">
+        <div class="screen-header">
+            <button class="back-btn" id="btn-back-levels"><i class="fas fa-arrow-left"></i></button>
+            <h2>Select Level</h2>
+            <div class="coin-display small"><i class="fas fa-coins"></i> <span class="coins-display">0</span></div>
+        </div>
+        <div class="environment-tabs" id="environment-tabs"></div>
+        <div class="level-grid" id="level-grid"></div>
+    </div>
+
+    <!-- Shop Screen -->
+    <div id="shop-screen" class="screen hidden">
+        <div class="screen-header">
+            <button class="back-btn" id="btn-back-shop"><i class="fas fa-arrow-left"></i></button>
+            <h2>Ball Shop</h2>
+            <div class="coin-display small"><i class="fas fa-coins"></i> <span class="coins-display">0</span></div>
+        </div>
+        <div class="shop-grid" id="shop-grid"></div>
+    </div>
+
+    <!-- Game Modes Screen -->
+    <div id="modes-screen" class="screen hidden">
+        <div class="screen-header">
+            <button class="back-btn" id="btn-back-modes"><i class="fas fa-arrow-left"></i></button>
+            <h2>Game Modes</h2>
+            <div class="coin-display small"><i class="fas fa-coins"></i> <span class="coins-display">0</span></div>
+        </div>
+        <div class="modes-grid" id="modes-grid"></div>
+    </div>
+
+    <!-- Achievements Screen -->
+    <div id="achievements-screen" class="screen hidden">
+        <div class="screen-header">
+            <button class="back-btn" id="btn-back-achievements"><i class="fas fa-arrow-left"></i></button>
+            <h2>Achievements</h2>
+            <div class="coin-display small"><i class="fas fa-coins"></i> <span class="coins-display">0</span></div>
+        </div>
+        <div class="achievements-list" id="achievements-list"></div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="screen hidden">
+        <div class="screen-header">
+            <button class="back-btn" id="btn-back-settings"><i class="fas fa-arrow-left"></i></button>
+            <h2>Settings</h2>
+        </div>
+        <div class="settings-content">
+            <div class="setting-item">
+                <span>Music</span>
+                <div class="toggle-switch" id="toggle-music" data-setting="music"><div class="toggle-knob"></div></div>
+            </div>
+            <div class="setting-item">
+                <span>Sound Effects</span>
+                <div class="toggle-switch" id="toggle-sfx" data-setting="sfx"><div class="toggle-knob"></div></div>
+            </div>
+            <div class="setting-item">
+                <span>Graphics Quality</span>
+                <select id="quality-select">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <span>Camera Sensitivity</span>
+                <input type="range" min="1" max="10" value="5" id="sensitivity-slider">
+            </div>
+            <div class="setting-item">
+                <span>Show FPS</span>
+                <div class="toggle-switch" id="toggle-fps" data-setting="showFps"><div class="toggle-knob"></div></div>
+            </div>
+            <button class="menu-btn danger" id="btn-reset-progress"><i class="fas fa-trash"></i> Reset Progress</button>
+        </div>
+    </div>
+
+    <!-- Daily Reward Modal -->
+    <div id="daily-reward-modal" class="modal hidden">
+        <div class="modal-content daily-reward">
+            <h2><i class="fas fa-gift"></i> Daily Reward!</h2>
+            <div class="reward-display" id="reward-display"></div>
+            <button class="menu-btn primary" id="btn-claim-reward">Claim Reward</button>
+        </div>
+    </div>
+
+    <!-- Game Canvas Container -->
+    <div id="game-container" class="hidden">
+        <canvas id="game-canvas"></canvas>
+        
+        <!-- Game HUD -->
+        <div id="game-hud">
+            <div class="hud-top">
+                <div class="hud-left">
+                    <div class="hud-item level-info">
+                        <span class="hud-label">LEVEL</span>
+                        <span class="hud-value" id="hud-level">1</span>
+                    </div>
+                    <div class="hud-item">
+                        <i class="fas fa-coins"></i>
+                        <span class="hud-value" id="hud-coins">0</span>
+                    </div>
+                </div>
+                <div class="hud-center">
+                    <div class="hud-item timer">
+                        <i class="fas fa-clock"></i>
+                        <span class="hud-value" id="hud-timer">00:00</span>
+                    </div>
+                </div>
+                <div class="hud-right">
+                    <div class="hud-item lives" id="hud-lives"></div>
+                    <button class="hud-btn" id="btn-pause"><i class="fas fa-pause"></i></button>
+                </div>
+            </div>
+            <div class="hud-score-popup hidden" id="score-popup"></div>
+            <div id="fps-counter" class="hidden">FPS: 60</div>
+        </div>
+
+        <!-- Mobile Controls -->
+        <div id="mobile-controls" class="hidden">
+            <div class="mobile-left">
+                <button class="mobile-btn" id="m-up" data-dir="up"><i class="fas fa-chevron-up"></i></button>
+                <button class="mobile-btn" id="m-down" data-dir="down"><i class="fas fa-chevron-down"></i></button>
+            </div>
+            <div class="mobile-center">
+                <button class="mobile-btn jump-btn" id="m-jump"><i class="fas fa-arrow-up"></i></button>
+            </div>
+            <div class="mobile-right">
+                <button class="mobile-btn" id="m-left" data-dir="left"><i class="fas fa-chevron-left"></i></button>
+                <button class="mobile-btn" id="m-right" data-dir="right"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pause-menu" class="modal hidden">
+        <div class="modal-content">
+            <h2>Paused</h2>
+            <button class="menu-btn primary" id="btn-resume"><i class="fas fa-play"></i> Resume</button>
+            <button class="menu-btn" id="btn-restart"><i class="fas fa-redo"></i> Restart</button>
+            <button class="menu-btn" id="btn-quit"><i class="fas fa-home"></i> Main Menu</button>
+        </div>
+    </div>
+
+    <!-- Victory Screen -->
+    <div id="victory-screen" class="modal hidden">
+        <div class="modal-content victory">
+            <h2><i class="fas fa-trophy"></i> Level Complete!</h2>
+            <div class="stars-display" id="victory-stars"></div>
+            <div class="victory-stats">
+                <div class="stat"><span>Time</span><span id="v-time">00:00</span></div>
+                <div class="stat"><span>Coins</span><span id="v-coins">0</span></div>
+                <div class="stat"><span>Score</span><span id="v-score">0</span></div>
+            </div>
+            <div class="victory-buttons">
+                <button class="menu-btn" id="btn-v-menu"><i class="fas fa-home"></i></button>
+                <button class="menu-btn" id="btn-v-restart"><i class="fas fa-redo"></i></button>
+                <button class="menu-btn primary" id="btn-v-next"><i class="fas fa-forward"></i> Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="modal hidden">
+        <div class="modal-content gameover">
+            <h2><i class="fas fa-skull-crossbones"></i> Game Over</h2>
+            <p class="gameover-text">You ran out of lives!</p>
+            <div class="gameover-buttons">
+                <button class="menu-btn" id="btn-go-menu"><i class="fas fa-home"></i> Menu</button>
+                <button class="menu-btn primary" id="btn-go-retry"><i class="fas fa-redo"></i> Retry</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/levels.js"></script>
+    <script src="js/physics.js"></script>
+    <script src="js/obstacles.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
